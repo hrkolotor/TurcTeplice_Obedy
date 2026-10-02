@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#B4441C</color>
+    <color name="accent_dark">#FF8B5E</color>
+    <color name="bg_light">#FAF8F4</color>
+    <color name="bg_dark">#141312</color>
+    <color name="fg_light">#1D1B19</color>
+    <color name="fg_dark">#ECEBE7</color>
+    <color name="muted_light">#6F6A63</color>
+    <color name="muted_dark">#A49F97</color>
+    <color name="launcher_bg">#B4441C</color>
+</resources>

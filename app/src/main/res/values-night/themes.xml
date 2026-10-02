@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.KamNaObed" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent_dark</item>
+        <item name="colorSecondary">@color/accent_dark</item>
+        <item name="colorSurface">@color/bg_dark</item>
+        <item name="colorSurfaceContainer">@color/bg_dark</item>
+        <item name="colorOnSurface">@color/fg_dark</item>
+        <item name="colorOnSurfaceVariant">@color/muted_dark</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
