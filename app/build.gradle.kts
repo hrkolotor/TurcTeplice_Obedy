@@ -5,21 +5,36 @@ plugins {
 
 android {
     namespace = "com.kamnaobed.tt"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.kamnaobed.tt"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 36
+        versionCode = 2
+        versionName = "1.1"
+    }
+
+    // Pevný podpisový kľúč v projekte: každý build (aj z GitHubu) má rovnaký podpis,
+    // takže novú verziu nainštalujete cez starú bez odinštalovania.
+    // Pre osobné použitie OK; na Google Play si vytvorte vlastný, tajný kľúč.
+    signingConfigs {
+        create("fixed") {
+            storeFile = file("kamnaobed.keystore")
+            storePassword = "kamnaobed"
+            keyAlias = "kamnaobed"
+            keyPassword = "kamnaobed"
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("fixed")
+        }
         release {
             isMinifyEnabled = false
-            // Pre jednoduchosť podpíše release debug kľúčom – na Google Play použite vlastný.
-            signingConfig = signingConfigs.getByName("debug")
+            isDebuggable = false
+            signingConfig = signingConfigs.getByName("fixed")
         }
     }
 

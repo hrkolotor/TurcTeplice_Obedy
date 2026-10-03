@@ -34,4 +34,13 @@ Alebo z príkazového riadku (s nainštalovaným Android SDK): `./gradlew assemb
 - `HtmlTemplate.kt` – vzhľad menu, zvýraznenie dnešného dňa, odkazy na telefóny
 - `MainActivity.kt` – záložky, obnovovanie, otváranie odkazov
 
-Požiadavky: minSdk 26 (Android 8.0+), targetSdk 35, AGP 8.9, Kotlin 2.1, Gradle 8.14.
+Požiadavky: minSdk 26 (Android 8.0+), targetSdk 36, AGP 8.13, Kotlin 2.1, Gradle 8.14.
+
+## Dôveryhodnosť pri inštalácii
+- APK je **release** build (nie ladiaci), cieli na aktuálny Android (API 36), používa len
+  povolenie INTERNET a komunikuje iba cez HTTPS.
+- Podpisový kľúč je pevný: `app/kamnaobed.keystore`
+  SHA-256 odtlačok certifikátu:
+  `72:DC:7C:32:00:A9:FC:DF:A0:89:FE:E5:CD:09:3C:76:19:60:41:67:65:C2:CA:FB:8F:10:A5:CE:AE:34:32:4D`
+  (tento odtlačok sa zadáva pri registrácii appky v Android Developer Console).
+- Repozitár držte **súkromný** – kto má kľúč, môže podpísať appku za vás.
