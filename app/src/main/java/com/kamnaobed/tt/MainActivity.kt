@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private var suppressTabEvents = false
     private var loading = false
     private var fetched = false
+    private var showOriginal = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         swipe = findViewById(R.id.swipe)
         setSupportActionBar(toolbar)
         repo = MenuRepository(this)
+        showOriginal = prefs.getBoolean(KEY_ORIGINAL, false)
 
         web.settings.javaScriptEnabled = true
         web.webViewClient = object : WebViewClient() {
@@ -76,12 +78,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
+        menu.findItem(R.id.action_original)?.isChecked = showOriginal
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_refresh -> { refresh(manual = true); true }
         R.id.action_open_web -> { openExternal(Uri.parse(MenuRepository.SOURCE_URL)); true }
+        R.id.action_original -> {
+            showOriginal = !showOriginal
+            item.isChecked = showOriginal
+            prefs.edit().putBoolean(KEY_ORIGINAL, showOriginal).apply()
+            tabs.selectedTabPosition.takeIf { it >= 0 }?.let { showRestaurant(it) }
+            true
+        }
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -135,9 +145,13 @@ class MainActivity : AppCompatActivity() {
     private fun showRestaurant(index: Int) {
         val r = restaurants.getOrNull(index) ?: return
         prefs.edit().putString(KEY_TAB, r.name).apply()
+        // Jednotný formát (deň, dátum, jedlo, cena); ak sa dáta nedajú rozpoznať, pôvodný formát z webu.
+        val unified = if (showOriginal) null else runCatching {
+            MenuNormalizer.normalize(r)?.let { MenuRenderer.render(it) }
+        }.getOrNull()
         web.loadDataWithBaseURL(
             MenuRepository.SOURCE_URL,
-            HtmlTemplate.build(r, Today.now()),
+            unified ?: HtmlTemplate.build(r, Today.now()),
             "text/html", "utf-8", null,
         )
     }
@@ -158,5 +172,6 @@ class MainActivity : AppCompatActivity() {
 
     private companion object {
         const val KEY_TAB = "selected_tab"
+        const val KEY_ORIGINAL = "show_original"
     }
 }

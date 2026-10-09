@@ -3,6 +3,7 @@
     <string name="app_name">Kam na obed TT</string>
     <string name="app_title">Kam na obed</string>
     <string name="action_refresh">Obnoviť</string>
+    <string name="action_original">Pôvodný formát</string>
     <string name="action_open_web">Otvoriť na webe mesta</string>
     <string name="subtitle_online">Turčianske Teplice · načítané %1$s</string>
     <string name="subtitle_offline">Offline · uložené %1$s</string>

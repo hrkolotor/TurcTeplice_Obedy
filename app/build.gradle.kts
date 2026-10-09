@@ -11,8 +11,8 @@ android {
         applicationId = "com.kamnaobed.tt"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
     }
 
     // Pevný podpisový kľúč v projekte: každý build (aj z GitHubu) má rovnaký podpis,
@@ -55,4 +55,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     implementation("org.jsoup:jsoup:1.18.3")
+
+    testImplementation("junit:junit:4.13.2")
 }

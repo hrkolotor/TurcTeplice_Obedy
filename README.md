@@ -4,6 +4,11 @@ Neoficiálna Android appka, ktorá zobrazuje denné menu reštaurácií zo strá
 https://www.turciansketeplice.sk/kam-na-obed-1.html
 
 ## Čo vie
+- **jednotný prehľad pre všetky prevádzky**: deň, dátum, jedlo a cena – bez gramáží
+  a alergénov; ceny sa doplnia aj z cenníka v úvode (napr. Novstav „Denné menu 4,5: 7,50 €“,
+  Anesis „Cena obedového menu 7,90 €“); zjavne chybný dátum (napr. „Piatok 7. 10.“) sa opraví
+- v menu (⋮) je prepínač **Pôvodný formát** – zobrazí sekciu presne ako na webe;
+  ak sa dáta niektorej prevádzky nepodarí rozpoznať, pôvodný formát sa použije automaticky
 - záložka pre každú reštauráciu (Bistro, Mimosa, Panda, Novstav, Anesis… podľa toho, čo je na webe)
 - automaticky skočí na **dnešný deň** a označí ho štítkom DNES
 - upozorní, ak reštaurácia ešte nezverejnila menu na aktuálny týždeň
@@ -31,6 +36,9 @@ Alebo z príkazového riadku (s nainštalovaným Android SDK): `./gradlew assemb
 ## Štruktúra
 - `MenuRepository.kt` – stiahnutie stránky + offline cache
 - `MenuParser.kt` – rozdelenie stránky na sekcie reštaurácií
+- `MenuNormalizer.kt` – vyťaženie dňa, dátumu, jedla a ceny z každej sekcie
+- `MenuRenderer.kt` – jednotné zobrazenie (karty po dňoch)
+- `src/test/` – test na skutočnej stránke z 5.–9. 10. 2026 (`./gradlew test`)
 - `HtmlTemplate.kt` – vzhľad menu, zvýraznenie dnešného dňa, odkazy na telefóny
 - `MainActivity.kt` – záložky, obnovovanie, otváranie odkazov
 
